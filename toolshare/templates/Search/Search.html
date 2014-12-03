@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Search Results{% endblock %}
+{% block content %}
+<div class="container">
+
+        {% if bool %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>More Details</th>
+                </tr>
+            </thead>
+            {% for tool in tool_list %}
+            <tr>
+                <td>{{ tool.toolname }}</td>
+                <td>{{ tool.description }}</td>
+                <td><a href="{% url 'tool:detail' tool.id%}" class="btn btn-sm btn-primary btn-xs">Detail</a></td>
+            </tr>
+            {% endfor %}
+            {% for shed in shed_list %}
+            <tr>
+                <td>{{ shed.shed_Name }}</td>
+                <td>{{ shed.description }}</td>
+                <td><a href="{% url 'shed:detail' shed.id %}" class="btn btn-sm btn-primary btn-xs"> Detail </a> </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h1>Nothing matched your search!</h1>
+        {% endif %}
+</div>
+{% endblock %}

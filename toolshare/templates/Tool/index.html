@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Tool List{% endblock %}
+{% block content %}
+<div class="container">
+    {% if not user.is_authenticated %}
+    <div class="alert alert-info" role="alert">
+        <strong>Warning!</strong> Please make an account <a href="{% url 'accounts:register' %}" class="alert-link">here</a>
+        before trying to borrow a tool!  You can search for tools in your area without registering by visiting
+        <a href="#" class="alert-link">this page</a>
+    </div>
+    {% else %}
+        {% if latest_tool_list %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Owner</th>
+                    <th>Description</th>
+                    <th>Shed</th>
+                    <th>Availability</th>
+                    <th>More Details</th>
+                </tr>
+            </thead>
+            {% for tool in latest_tool_list %}
+            <tr>
+                <td>{{ tool.toolname }}</td>
+                <td>{{ tool.owner.first_name }} {{ tool.owner.last_name }}</td>
+                <td>{{ tool.description }}</td>
+                <td>{{ tool.ownershed }}</td>
+                <td>{{ tool.get_status_name }}</td>
+                <td><a href="{% url 'tool:detail' tool.id%}" class="btn btn-sm btn-primary btn-xs">Detail</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h1>No Tools have been registered in your ShareZone!</h1>
+        <h2>Be the first! Create a new tool <a href="{% url 'tool:register' %}">here</a>!</h2>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

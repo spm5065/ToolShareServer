@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Tool Details{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>{{ tool.toolname }}</h1>
+
+        <p>Unique Identifier: {{ tool.identifier }}</p>
+
+        <p>Description: {{ tool.description }}</p>
+
+        <p>Shared: {{ tool.shared }}</p>
+
+        <p>Owner: {{ tool.owner.username }}</p>
+
+        <p>Shed: {{ tool.ownershed.shed_Name }}</p>
+
+        <p>Current Status: {{ tool.get_status_name }}</p>
+        {% if tool.shared and tool.status == 'A' %}
+        <p><a href="{% url 'borrow:request' tool.id%}" class="btn btn-sm btn-success btn-lg">Borrow</a></p>
+        {% endif %}
+
+        <p><a href="{% url 'tool:stats' tool.id %}"><button class="btn btn-sm btn-success">Statistics</button></a></p>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Tool Detail{% endblock %}
+{% block content %}
+    <div class="container">
+
+        <p>
+
+        <form action="" method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Update Tool"/>
+        </form>
+        </p>
+    </div>
+{% endblock %}

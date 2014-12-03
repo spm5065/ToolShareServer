@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Change User Address{% endblock %}
+{% block content %}
+<div class="container">
+
+<form action="" method="post" class="form-horizontal" role="form">{% csrf_token %}
+    <p><b>Warning!</b> Changing your address <b>will</b> cause you to lose all your shed and tool registrations until returning to the zipcode you registered them in.</p>
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+
+</div>
+{% endblock %}

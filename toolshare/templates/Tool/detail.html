@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Edit Tool{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3>Tool Owner: {{ tool.owner.first_name }} {{ tool.owner.last_name }}</h3>
+
+    <p>
+
+    <form action="" method="post" class="form-horizontal" role="form">
+        <div class="checkbox">
+            <label>
+                {% if shared %}
+                 <input type="checkbox" checked="yes"> Change Tool Availability (only the owner can change the availability):
+                {% else %}
+                <input type="checkbox"> Change Tool Availability (only the owner can change the availability):
+                {% endif %}
+            </label>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+    </p>
+</div>
+{% endblock %}

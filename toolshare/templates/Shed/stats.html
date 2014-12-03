@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Shed Statistics{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="chart">
+            <h3>Shed Tools and Use</h3>
+            <table id="data-table" border="1" cellpadding="10" cellspacing="0"
+                   summary="Tools in the shed and their approval percentages.">
+                <caption>Tool</caption>
+                <thead>
+                    <tr>
+                        <td>&nbsp;</td>
+                        {% for tool in shed.tools.all %}
+                            <th scope="col">{{ tool.toolname }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Borrows</th>
+                        {% for tool in shed.tools.all %}
+                            <td>{{ tool.borrows }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th scope="row">Requests</th>
+                        {% for tool in shed.tools.all %}
+                            <td>{{ tool.requests }}</td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<script src="/static/js/graph.js"></script>
+{% endblock %}

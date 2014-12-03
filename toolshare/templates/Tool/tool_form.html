@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Create Tool{% endblock %}
+{% block content %}
+<div class="container">
+    {% if not user.is_authenticated %}
+    <div class="alert alert-info" role="alert">
+        <strong>Warning!</strong> Please make an account <a href="{% url 'accounts:register' %}" class="alert-link">here</a>
+        before creating a tool!
+    </div>
+    {% else %}
+    <!-- Shed creation form -->
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h2>Create Tool</h2>
+            {% if form.errors %}
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <strong>Error!</strong> Please make sure to fill all fields and try again.
+            </div>
+            {% endif %}
+            <p>
+            {{ form.non_field_errors }}
+            <form action="" method="post" class="form-horizontal" role="form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_toolname" class="col-sm-2 control-label">Name</label>
+
+                    <div class="col-sm-4">
+                        <input class="form-control" placeholder="Name" id="id_toolname" maxlength="100"
+                               name="toolname"
+                               type="text" data-cip-id="id_toolname">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_identifier" class="col-sm-2 control-label">Unique Identifier</label>
+
+                    <div class="col-sm-4">
+                        <input class="form-control" placeholder="Unique Identifier" id="id_identifier" maxlength="100"
+                               name="identifier"
+                               type="text" data-cip-id="id_identifier">
+                    </div>
+                    {{ form.identifier.errors }}
+                </div>
+                <div class="form-group">
+                    <label for="id_description" class="col-sm-2 control-label">Description</label>
+
+                    <div class="col-sm-4">
+                        <textarea rows="4" class="form-control" placeholder="Description" id="id_description"
+                                  maxlength="300"
+                                  name="description"
+                                  type="text" data-cip-id="id_description"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-success">Create Tool</button>
+                    </div>
+                </div>
+            </form>
+            </p>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

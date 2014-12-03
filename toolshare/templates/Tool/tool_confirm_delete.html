@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Tool List{% endblock %}
+{% block content %}
+<div class="container">
+{% if tool.status == 'U' %}
+<form action="" method="post">{% csrf_token %}
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+    <input type="submit" value="Confirm" />
+</form>
+{% else %}
+<h1>This tool cannot be delete currently.</h1>
+<h2>Please wait for it to be returned, or change it's status to unavailable.</h2>
+{% endif %}
+</div>
+{% endblock %}

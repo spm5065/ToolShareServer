@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}My Shed List{% endblock %}
+{% block content %}
+<div class="container">
+    {% if not user.is_authenticated %}
+    <div class="alert alert-info" role="alert">
+        <strong>Warning!</strong> Please make an account <a href="{% url 'accounts:register' %}" class="alert-link">here</a>
+        before accessing sheds!
+    </div>
+    {% else %}
+        {% if query_shed_list %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Zipcode</th>
+                    <th>Description</th>
+                    <th>More Details</th>
+                </tr>
+            </thead>
+            {% for shed in query_shed_list %}
+            <tr>
+                <td>{{ shed.shed_Name }}</td>
+                <td>{{ shed.Zip_Code }}</td>
+                <td>{{ shed.description }}</td>
+                <td><a href="{% url 'shed:detail' shed.id%}"><button class="btn btn-sm btn-success">Details</button></a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h1>You have not yet registered any sheds!</h1>
+
+        <h2>To browse and register sheds, go <a href="{% url 'shed:shed_list' 1 %}">here</a>!</h2>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

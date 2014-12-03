@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}My Tool List{% endblock %}
+{% block content %}
+<div class="container">
+    {% if not user.is_authenticated %}
+    <div class="alert alert-info" role="alert">
+        <strong>Warning!</strong> Please make an account <a href="{% url 'accounts:register' %}" class="alert-link">here</a>
+        before adding any of your own tools!
+    </div>
+    {% else %}
+        {% if query_tool_list %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Owner</th>
+                    <th>Description</th>
+                    <th>Shed</th>
+                    <th>Availability</th>
+                    <th>More Details</th>
+                    <th>Owner Options</th>
+                    <th>Delete Tool</th>
+                </tr>
+            </thead>
+            {% for tool in query_tool_list %}
+            <tr>
+                <td>{{ tool.toolname }}</td>
+                <td>{{ tool.owner.first_name }} {{ tool.owner.last_name }}</td>
+                <td>{{ tool.description }}</td>
+                <td>{{ tool.ownershed }}</td>
+                <td>{{ tool.get_status_name }}</td>
+                <td><a href="{% url 'tool:detail' tool.id%}" class="btn btn-sm btn-primary btn-xs">Detail</a></td>
+                <td><a href="{% url 'tool:edit' tool.id%}" class="btn btn-sm btn-warning btn-xs">Edit</a></td>
+                <td>
+                    {% if tool.status = 'U' %}
+                        <a href="{% url 'tool:delete' tool.id%}" class="btn btn-sm btn-danger btn-xs">Delete</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h1>You have not registered or borrowed any tools!</h1>
+        <h2>To register a tool, go <a href="{% url 'tool:register' %}">here</a>!
+            To borrow a tool, go <a href="{% url 'tool:tool_list' %}">here</a>!</h2>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

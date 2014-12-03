@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Shed List{% endblock %}
+{% block content %}
+<div class="container">
+    {% if not user.is_authenticated %}
+    <div class="alert alert-info" role="alert">
+        <strong>Warning!</strong> Please make an account <a href="{% url 'accounts:register' %}" class="alert-link">here</a>
+        before accessing sheds!
+    </div>
+    {% else %}
+        {% if query_shed_list %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Zipcode</th>
+                    <th>Description</th>
+                    <th>More Details</th>
+                    <th>Registered</th>
+                </tr>
+            </thead>
+            {% for shed in query_shed_list %}
+            <tr>
+                <td>{{ shed.shed_Name }}</td>
+                <td>{{ shed.Zip_Code }}</td>
+                <td>{{ shed.description }}</td>
+                <form action="{% url 'shed:detail' shed.id%}">
+                        <td>
+                            <button type="submit" class="btn btn-primary btn-xs">More Info</button>
+                        </td>
+                </form>
+                {% if registered_dict|get_item:shed.id %}
+                    <form action="{% url 'shed:deregister_user' shed.id %}" method="post">
+                        {% csrf_token %}
+                        <td>
+                            <button type="submit" class="btn btn-danger btn-xs">Deregister</button>
+                        </td>
+                    </form>
+                {% else %}
+                    <form action="{% url 'shed:register_user' shed.id %}" method="post">
+                        {% csrf_token %}
+                        <td>
+                            <button type="submit" class="btn btn-success btn-xs">Register</button>
+                        </td>
+                    </form>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+        <ul class="pagination">
+            <li><a href="{% url 'shed:shed_list' previous_page_id %}">&laquo;</a></li> <!-- Back one page -->
+            {% for i in num_pages %}
+                <li><a href="{% url 'shed:shed_list' i %}">{{ i }}</a></li>
+            {% endfor %}
+            <li><a href="{% url 'shed:shed_list' next_page_id %}">&raquo;</a></li> <!-- Forward one page -->
+        </ul>
+        {% else %}
+        <h1>No Sheds have been registered in your ShareZone!</h1>
+
+        <h2>Be the first! Create a new shed <a href="{% url 'shed:register' %}">here</a>!</h2>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

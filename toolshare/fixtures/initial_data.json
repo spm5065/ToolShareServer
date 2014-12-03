@@ -1,0 +1,212 @@
+[
+   {  
+      "pk":1,
+      "model":"auth.user",
+      "fields":{  
+         "username":"naf9685",
+         "first_name":"",
+         "last_name":"",
+         "is_active":true,
+         "is_superuser":true,
+         "is_staff":true,
+         "last_login":"2014-11-30T23:26:48.466Z",
+         "groups":[  
+
+         ],
+         "user_permissions":[  
+
+         ],
+         "password":"pbkdf2_sha256$12000$XMXLWTn2GLWn$HR9u9b0VtoN92rK4OTdmhhVo3PAB6wyUmMYJjTufbPk=",
+         "email":"naf9685@g.rit.edu",
+         "date_joined":"2014-11-30T23:26:48.466Z"
+      }
+   },
+   {  
+      "pk":2,
+      "model":"auth.user",
+      "fields":{  
+         "username":"gabe",
+         "first_name":"Gaben",
+         "last_name":"Newell",
+         "is_active":true,
+         "is_superuser":true,
+         "is_staff":true,
+         "last_login":"2014-11-30T23:59:17.057Z",
+         "groups":[  
+
+         ],
+         "user_permissions":[  
+
+         ],
+         "password":"pbkdf2_sha256$12000$YaRG7BridK92$pK9roHv4wPBBzeqDwMjysVEKOFdXOLtIcdvI48QHEL0=",
+         "email":"gabe@valve.com",
+         "date_joined":"2014-11-30T23:59:16.990Z"
+      }
+   },
+   {  
+      "pk":3,
+      "model":"auth.user",
+      "fields":{  
+         "username":"tom",
+         "first_name":"Tom",
+         "last_name":"Tooley",
+         "is_active":true,
+         "is_superuser":false,
+         "is_staff":false,
+         "last_login":"2014-12-01T00:01:27.241Z",
+         "groups":[  
+
+         ],
+         "user_permissions":[  
+
+         ],
+         "password":"pbkdf2_sha256$12000$wKbcc2UbywzP$bczExBV84fVfFOmXEDLkzy6Zx1hAwEWx8MJzBdrEWrM=",
+         "email":"tom@tomtooley.com",
+         "date_joined":"2014-12-01T00:01:27.171Z"
+      }
+   },
+   {  
+      "pk":1,
+      "model":"Tool.tool",
+      "fields":{  
+         "status":"U",
+         "description":"The infamous wrench",
+         "toolname":"Wrenchy",
+         "borrows":0,
+         "ownershed": 2,
+         "owner":2,
+         "shared":false,
+         "requests":0,
+         "identifier":"Black Handle",
+         "borrower":null
+      }
+   },
+   {  
+      "pk":2,
+      "model":"Tool.tool",
+      "fields":{  
+         "status":"U",
+         "description":"Not as glorious",
+         "toolname":"Hammer",
+         "borrows":41,
+         "ownershed":2,
+         "owner":2,
+         "shared":true,
+         "requests":43,
+         "identifier":"Black Handle",
+         "borrower":null
+      }
+   },
+   {  
+      "pk":3,
+      "model":"Tool.tool",
+      "fields":{  
+         "status":"A",
+         "description":"Jiggity Jig",
+         "toolname":"Jigsaw",
+         "borrows":67,
+         "ownershed":2,
+         "owner":3,
+         "shared":true,
+         "requests":94,
+         "identifier":"Tom carved on the hilt",
+         "borrower":null
+      }
+   },
+   {
+      "pk":4,
+      "model":"Tool.tool",
+      "fields":{
+         "status":"U",
+         "description":"Not as glorious",
+         "toolname":"Pink Hammer",
+         "borrows":113,
+         "ownershed":2,
+         "owner":2,
+         "shared":true,
+         "requests":157,
+         "identifier":"Hot Pink Handle",
+         "borrower":null
+      }
+   },
+   {  
+      "pk":1,
+      "model":"Shed.shed",
+      "fields":{  
+         "City":"Putney",
+         "shed_Name":"Tom's Tools",
+         "description":"aegf",
+         "State":"VT",
+         "uses":0,
+         "Shed_Owner":2,
+         "Street_Address":"9 Laughing Lane",
+         "Zip_Code":"14623"
+      }
+   },
+   {  
+      "pk":2,
+      "model":"Shed.shed",
+      "fields":{  
+         "City":"Rochester",
+         "shed_Name":"Gabe's Tools",
+         "description":"sehghth",
+         "State":"NY",
+         "uses":0,
+         "Shed_Owner":2,
+         "Street_Address":"1 Lomb Memorial Drive",
+         "Zip_Code":"14623"
+      }
+   },
+   {  
+      "pk":1,
+      "model":"share_user.shareuser",
+      "fields":{  
+         "city":"",
+         "sheds":[  
+
+         ],
+         "zipcode":"",
+         "state":"",
+         "user":1,
+         "tools":[  
+
+         ],
+         "street_address":""
+      }
+   },
+   {  
+      "pk":2,
+      "model":"share_user.shareuser",
+      "fields":{  
+         "city":"Putney",
+         "sheds":[  
+            2
+         ],
+         "zipcode":"14623",
+         "state":"NY",
+         "user":2,
+         "tools":[  
+            1,
+            2
+         ],
+         "street_address":"9 Laughing Lane"
+      }
+   },
+   {  
+      "pk":3,
+      "model":"share_user.shareuser",
+      "fields":{  
+         "city":"Putney",
+         "sheds":[  
+            1
+         ],
+         "zipcode":"14623",
+         "state":"NY",
+         "user":3,
+         "tools":[  
+            3
+         ],
+         "street_address":"11 Laughing Lane"
+      }
+   }
+]

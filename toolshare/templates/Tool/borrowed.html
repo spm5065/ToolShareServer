@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Borrowed Tool List{% endblock %}
+{% block content %}
+<div class="container">
+    {% if not user.is_authenticated %}
+    <div class="alert alert-info" role="alert">
+        <strong>Warning!</strong> Please make an account <a href="{% url 'accounts:register' %}" class="alert-link">here</a>
+        before trying to borrow a tool!  You can search for tools in your area without registering by visiting
+        <a href="#" class="alert-link">this page</a>
+    </div>
+    {% else %}
+        {% if borrowed_tool_list %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Owner</th>
+                    <th>Description</th>
+                    <th>Shed</th>
+                    <th>Availability</th>
+                    <th>Return Tool</th>
+                </tr>
+            </thead>
+            {% for tool in borrowed_tool_list %}
+            <tr>
+                <td>{{ tool.toolname }}</td>
+                <td>{{ tool.owner.first_name }} {{ tool.owner.last_name }}</td>
+                <td>{{ tool.description }}</td>
+                <td>{{ tool.ownershed }}</td>
+                <td>{{ tool.get_status_name }}</td>
+                <td><a href="{% url 'tool:return_tool' tool.id%}" class="btn btn-sm btn-primary btn-xs">Return</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h1>You haven't borrowed any tools!</h1>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

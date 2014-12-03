@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}Borrow Request{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h2 class="panel-title">Borrow Request</h2>
+            </div>
+            <div class="panel-body">
+                {% if form.start_date.errors %}
+                    <div class="alert alert-danger" role="alert">{{ form.start_date.errors }}</div>
+                {% endif %}
+                {% if form.end_date.errors %}
+                    <div class="alert alert-danger" role="alert">{{ form.end_date.errors }}</div>
+                {% endif %}
+                <p>To issue a request to borrow this tool, please fill out the range you would like to borrow the tool.</p>
+                {% if tool.ownershed == None %}
+                    <p>This tool belongs to a Home Shed, therefore you must contact the owner directly by filling out
+                    the Custom Request Message with any pickup/dropoff information.  Once the tool owner has approved your
+                    Borrow Request you will receive an automated email notifying you.
+                    </p>
+                {% endif %}
+                <form action="{% url 'borrow:request' tool.id %}" method="post" class="form-horizontal" role="form">
+                    {% csrf_token %}
+                    <div class="col-sm-6" style="height:75px;">
+                        <div class='col-md-4'>
+                            <div class="form-group">
+                                <label for="id_start_date">Start date:</label>
+                                <div class='input-group date' id='datetimepicker1'>
+                                    <input id="id_start_date" name="start_date" type="text" data-cip-id="id_start_date"
+                                           class="form-control"/>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col-md-4'>
+                            <div class="form-group">
+                                <label for="id_end_date">End date:</label>
+                                <div class='input-group date' id='datetimepicker2'>
+                                    <input input id="id_end_date" name="end_date" type="text" data-cip-id="id_end_date"
+                                           class="form-control"/>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        $(function () {
+                            $('#datetimepicker1').datetimepicker({
+                                pickDate: true,
+                                pickTime: false,
+                                useCurrent: true,
+                                defaultDate: moment(),
+                                minDate: moment(),
+                                maxDate: moment().add(2, 'months'),
+                                disabledDates: [
+                                ]
+                            });
+                            $('#datetimepicker2').datetimepicker({
+                                pickDate: true,
+                                pickTime: false,
+                                minDate: moment(),
+                                maxDate: moment().add(2, 'months'),
+                                disabledDates: [
+                                ]
+                            });
+                            // Doesn't allow for start date > end date
+                            $("#datetimepicker1").on("dp.change", function (e) {
+                                $('#datetimepicker2').data("DateTimePicker").setMinDate(e.date);
+                            });
+                            $("#datetimepicker2").on("dp.change", function (e) {
+                                $('#datetimepicker1').data("DateTimePicker").setMaxDate(e.date);
+                            });
+                        });
+                    </script>
+
+                    {% if tool.ownershed == None %}
+                    <div class="form-group">
+                        <label for="id_message">Custom Request Message:</label>
+                        <div class='col-md-5'>
+                            <textarea id="id_message" name="message" type="text" data-cip-id="id_message" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {#{{ form.as_p }}#}
+                    <div class="form-group">
+                        <div class="col-sm-offset-1 col-sm-10">
+                            <input type="submit" class="btn btn-primary" value="Submit"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

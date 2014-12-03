@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Tool Pickup{% endblock %}
+{% block content %}
+    <div class="container">
+
+        <p>
+        <form action="" method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Tool Picked Up"/>
+        </form>
+        </p>
+    </div>
+{% endblock %}
